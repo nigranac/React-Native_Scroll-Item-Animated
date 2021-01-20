@@ -43,19 +43,20 @@ const Work = () => {
         keyExtractor={(item) => item.key}
         renderItem={({item, index}) => {
           return (
-            <View style={{flexDirection:"row"}}>
+            <View style={{flexDirection:"row",padding:SPACING,marginBottom:SPACING}}>
               <Image
                 source={{uri: item.image}}
                 style={{
                   width: AVATAR_SIZE,
                   height: AVATAR_SIZE,
                   borderRadius: AVATAR_SIZE,
+                  marginRight:SPACING/2
                 }}
               />
               <View>
-                  <Text>{item.name}</Text>
-                  <Text>{item.jobTitle}</Text>
-                  <Text>{item.email}</Text>
+                  <Text style={{fontSize:22,fontWeight:"700"}}>{item.name}</Text>
+                  <Text style={{fontSize:18,opacity:.7}}>{item.jobTitle}</Text>
+                  <Text style={{fontSize:14,opacity:.8,color:"#0099cc"}}>{item.email}</Text>
               </View>
             </View>
           );

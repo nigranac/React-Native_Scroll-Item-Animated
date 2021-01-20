@@ -32,25 +32,27 @@ const DATA = [...Array(30).keys()].map((_, i) => {
 
 const SPACING = 20;
 const AVATAR_SIZE = 70;
-const BG="https://www.pexels.com/photo/pink-rose-closeup-photography-1231265/"
+const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
+
+const BG =
+  'https://www.pexels.com/photo/pink-rose-closeup-photography-1231265/';
 
 const Work = () => {
-  const scrollY=React.useRef(new Animated.Value(0)).current
+  const scrollY = React.useRef(new Animated.Value(0)).current;
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar hidden />
-     <Image
-     source={{uri:BG}}
-     style={StyleSheet.absoluteFillObject}
-     blurRadius={80}
-     
-     />
+      <Image
+        source={{uri: BG}}
+        style={StyleSheet.absoluteFillObject}
+        blurRadius={80}
+      />
 
       <Animated.FlatList
         data={DATA}
         onScroll={Animated.event(
-          [{nativeEvent:{contentOffset:{y:scrollY}}}],
-          {useNativeDriver:true}
+          [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          {useNativeDriver: true},
         )}
         keyExtractor={(item) => item.key}
         contentContainerStyle={{
@@ -58,8 +60,13 @@ const Work = () => {
           paddingTop: StatusBar.currentHeight || 42,
         }}
         renderItem={({item, index}) => {
+          const inputRange = [-1, 0,ITEM_SIZE*index,ITEM_SIZE*(index+2)];
+          const scale=scrollY.interpolate({
+            inputRange,
+            outputRange:[1,1,1,0]
+          })
           return (
-            <View
+            <Animated.View
               style={{
                 flexDirection: 'row',
                 padding: SPACING,
@@ -71,6 +78,7 @@ const Work = () => {
                 },
                 shadowOpacity: 0.3,
                 shadowRadius: 20,
+                transform:[{scale}]
               }}>
               <Image
                 source={{uri: item.image}}
@@ -92,7 +100,7 @@ const Work = () => {
                   {item.email}
                 </Text>
               </View>
-            </View>
+            </Animated.View>
           );
         }}
       />

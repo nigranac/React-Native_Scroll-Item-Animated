@@ -35,6 +35,7 @@ const AVATAR_SIZE = 70;
 const BG="https://www.pexels.com/photo/pink-rose-closeup-photography-1231265/"
 
 const Work = () => {
+  const scrollY=React.useRef(new Animated.Value(0)).current
   return (
     <View style={{flex: 1, backgroundColor: '#fff'}}>
       <StatusBar hidden />
@@ -45,8 +46,12 @@ const Work = () => {
      
      />
 
-      <FlatList
+      <Animated.FlatList
         data={DATA}
+        onScroll={Animated.event(
+          [{nativeEvent:{contentOffset:{y:scrollY}}}],
+          {useNativeDriver:true}
+        )}
         keyExtractor={(item) => item.key}
         contentContainerStyle={{
           padding: SPACING,

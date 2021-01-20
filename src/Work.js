@@ -95,6 +95,7 @@ const Work = () => {
                   width: 0,
                   height: 10,
                 },
+                borderRadius:22,
                 shadowOpacity: 0.3,
                 shadowRadius: 20,
                 opacity,

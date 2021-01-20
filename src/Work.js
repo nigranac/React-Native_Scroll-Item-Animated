@@ -61,8 +61,15 @@ const Work = () => {
         }}
         renderItem={({item, index}) => {
           const inputRange = [-1, 0,ITEM_SIZE*index,ITEM_SIZE*(index+2)];
+          const opacityInputRange=[
+            -1, 0,ITEM_SIZE*index,ITEM_SIZE*(index+.5)
+          ]
           const scale=scrollY.interpolate({
             inputRange,
+            outputRange:[1,1,1,0]
+          })
+          const opacity=scrollY.interpolate({
+            inputRange:opacityInputRange,
             outputRange:[1,1,1,0]
           })
           return (
@@ -78,6 +85,7 @@ const Work = () => {
                 },
                 shadowOpacity: 0.3,
                 shadowRadius: 20,
+                opacity,
                 transform:[{scale}]
               }}>
               <Image
